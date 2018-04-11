@@ -1,0 +1,33 @@
+<h1>Livros</h1>
+
+<p>Lista de livros dispon&iacute;vels em ordem alfab&eacute;tica.</p>
+
+<p *ngIf="!livros"><em>Aguarde...</em></p>
+<p>
+    <a class="btn btn-primary" [routerLink]="['/livro-incluir'] "title="Incluir Livro">Incluir</a>
+</p>
+
+<table class='table' *ngIf="livros">
+    <thead>
+        <tr>
+            <th>T&iacute;tulo</th>
+            <th>Autor</th>
+            <th>P&aacute;ginas</th>
+            <th>Editora</th>
+            <th>Publica&ccedil;&atilde;o</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let livro of livros">
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.paginas }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.dataPublicacao | date:'dd/MM/yyyy' }}</td>
+            <td>
+                <a class="btn btn-info" [routerLink]="['/livro/edit/', livro.id]" title="Alterar Livro"><span class='glyphicon glyphicon-pencil'></span></a>
+                <a class="btn btn-danger" [routerLink]="" (click)="delete(livro.id)" title="Excluir Livro"><span class='glyphicon glyphicon-remove'></span></a>
+            </td>
+        </tr>
+    </tbody>
+</table>

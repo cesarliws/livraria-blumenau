@@ -1,22 +1,26 @@
 import { NgModule } from '@angular/core';
+
+import { LivroService } from './services/livro.datasource.service'
+
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { AppComponent } from './components/app/app.component';
+
+import { AppComponent     } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
-import { CounterComponent } from './components/counter/counter.component';
+import { HomeComponent    } from './components/home/home.component';
+import { LivroComponent   } from './components/livro/livro.component';
+import { EditLivro        } from './components/livro/edit/livro.edit.component'
 
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent
+        HomeComponent,
+        LivroComponent,
+        EditLivro
     ],
     imports: [
         CommonModule,
@@ -25,11 +29,13 @@ import { CounterComponent } from './components/counter/counter.component';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'livro', component: LivroComponent },
+            { path: 'livro-incluir', component: EditLivro },
+            { path: 'livro/edit/:id', component: EditLivro },
             { path: '**', redirectTo: 'home' }
         ])
-    ]
+    ],
+    providers: [LivroService]
 })
 export class AppModuleShared {
 }
