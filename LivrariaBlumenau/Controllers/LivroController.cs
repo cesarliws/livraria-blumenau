@@ -3,7 +3,6 @@ using LivrariaBlumenau.Models;
 using LivrariaBlumenau.Services;
 
 using Microsoft.AspNetCore.Mvc;
-//using AutoMapper;
 
 namespace LivrariaBlumenau.Controllers
 {
@@ -47,29 +46,23 @@ namespace LivrariaBlumenau.Controllers
         [Route("api/Livro/Create")]
         public async Task<IActionResult> Create([FromBody]Livro livro)
         {
-            if (livro == null)
+            if (livro == null || !ModelState.IsValid)
             {
                 return BadRequest();
             }
-            if (ModelState.IsValid)
-            {
-                await _livroService.CreateAsync(livro);
-                return Ok(livro);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            await _livroService.CreateAsync(livro);
+            return Ok(livro);
         }
 
         [HttpPut]
         [Route("api/Livro/Edit")]
         public async Task<IActionResult> Edit([FromBody]Livro livro)
         {
-            if (livro == null)
+            if (livro == null || !ModelState.IsValid)
             {
                 return BadRequest();
             }
+
             await _livroService.UpdateAsync(livro);
             return Ok(livro);
         }
@@ -82,6 +75,7 @@ namespace LivrariaBlumenau.Controllers
             {
                 return BadRequest();
             }
+
             await _livroService.DeleteAsync(id);
             return NoContent();
         }
