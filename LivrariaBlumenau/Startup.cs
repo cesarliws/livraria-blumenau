@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using LivrariaBlumenau.Models;
+using LivrariaBlumenau.Services;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace LivrariaBlumenau
 {
@@ -19,13 +20,13 @@ namespace LivrariaBlumenau
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            ConfigureDatabase(services);
+            ConfigureModelMapping(services);
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -54,5 +55,18 @@ namespace LivrariaBlumenau
                     defaults: new { controller = "Home", action = "Index" });
             });
         }
+
+        public void ConfigureDatabase(IServiceCollection services)
+        {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DbEntities>(options =>
+                options.UseSqlServer(connectionString));
+        }
+
+        private static void ConfigureModelMapping(IServiceCollection services)
+        {
+            services.AddTransient<IModelService<Livro>, LivroService>();
+        }
+
     }
 }
