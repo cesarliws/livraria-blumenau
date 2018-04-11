@@ -1,4 +1,4 @@
-# Sistema Livraria Blumenay
+# Sistema Livraria Blumenau
 
 Backend webapi em C# asp .net core 2 mvc e frontend em Angular
 
