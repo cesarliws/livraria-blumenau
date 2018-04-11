@@ -1,4 +1,4 @@
-# Aplicação Teste C# com Angular
+# Sistema Livraria - backend webapi em C# asp .net core 2 mvc e frontend em Angular
 
 Projeto criado com:
 
