@@ -1,5 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { LivroService } from '../../services/livro.datasource.service';
+
 
 @Component({
     selector: 'livro',
@@ -9,10 +11,23 @@ import { Http } from '@angular/http';
 export class LivroComponent {
     public livros: Livro[];
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/livro').subscribe(result => {
+    constructor(private livroService: LivroService, private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+        this.getLivros();
+    }
+
+    getLivros() {
+        this.http.get(this.baseUrl + 'api/livro').subscribe(result => {
             this.livros = result.json() as Livro[];
         }, error => console.error(error));
+        
+    }
+
+    delete(id: number) {
+        if (confirm("Excluir o Livro?")) {
+            this.livroService.deleteLivro(id).subscribe((data) => {
+                this.getLivros();
+            }, error => console.error(error)) 
+        }
     }
 }
 
