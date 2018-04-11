@@ -1,0 +1,27 @@
+﻿.form-group[required="required"] input:not(.required) {
+    border: 1px solid black;
+}
+
+.form-group[required="required"] input {
+    border: 1px solid red;
+}
+
+.form-group[required="required"] label:after {
+    content: " *";
+    color: red;
+}
+
+/* With only the required attribute */
+
+.form-group[required] input {
+    border: 1px solid red;
+}
+
+.form-group[required] label:after {
+    content: " *";
+    color: red;
+}
+
+.col-md-12 {
+    float: left;
+}

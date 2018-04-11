@@ -6,8 +6,9 @@ import { LivroComponent } from '../../livro/livro.component';
 import { LivroService } from '../../../services/livro.datasource.service';
 
 @Component({
-    selector: 'livro-incluir',
-    templateUrl: './livro.edit.component.html'
+    selector: 'livro/incluir',
+    templateUrl: './livro.edit.component.html',
+    styleUrls: ['./livro.edit.component.css']
 })
 
 export class EditLivroComponent implements OnInit {
@@ -24,12 +25,21 @@ export class EditLivroComponent implements OnInit {
         }
 
         this.livroForm = this.formBuild.group({
-            //id: 0,
+            id: 0,
             titulo: ['', [Validators.required]],
             autor: ['', [Validators.required]],
             paginas: ['', [Validators.required]],
+            edicao: '',
+            idioma: ['', [Validators.required]],
             editora: ['', [Validators.required]],
-            dataPublicacao: ['', [Validators.required]]
+            descricao: '',
+            dataPublicacao: '',
+            isbN10: '',
+            isbN13: '',
+            estoque: 0,
+            active: true,
+            createdAt: new Date(),
+            editedAt: new Date()
         })
     }
 
@@ -46,14 +56,15 @@ export class EditLivroComponent implements OnInit {
         if (!this.livroForm.valid) {
             return;
         }
-
-        if (this.title == "Incluir") {
+        
+        if (this.title == 'Incluir') {
             this.livroService.saveLivro(this.livroForm.value)
                 .subscribe((data) => {
+                    this.livroService.getLivros();
                     this.router.navigate(['/livro']);
                 }, error => this.errorMessage = error)
         }
-        else if (this.title == "Alterar") {
+        else if (this.title == 'Alterar') {
             this.livroService.updateLivro(this.livroForm.value)
                 .subscribe((data) => {
                     this.router.navigate(['/livro']);
@@ -68,7 +79,16 @@ export class EditLivroComponent implements OnInit {
     get titulo() { return this.livroForm.get('titulo'); }
     get autor() { return this.livroForm.get('autor'); }
     get paginas() { return this.livroForm.get('paginas'); }
+    get edicao() { return this.livroForm.get('edicao'); }
+    get idioma() { return this.livroForm.get('idioma'); }
     get editora() { return this.livroForm.get('editora'); }
+    get descricao() { return this.livroForm.get('descricao'); }
     get dataPublicacao() { return this.livroForm.get('dataPublicacao'); }
+    get isbN10() { return this.livroForm.get('isbn10'); }
+    get isbN13() { return this.livroForm.get('isbn13'); }
+    get estoque() { return this.livroForm.get('estoque'); } 
+    get active() { return this.livroForm.get('active'); } 
+    get createdAt() { return this.livroForm.get('createdAt'); } 
+    get editedAt() { return this.livroForm.get('editedAt'); } 
 }
 

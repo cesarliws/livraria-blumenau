@@ -11,58 +11,105 @@
 
     <form [formGroup]="livroForm" (ngSubmit)="save()" #formDir="ngForm" novalidate>
 
-            <div class="form-group row">
-                <label class=" control-label col-md-12" for="Name">Título</label>
-                <div class="col-md-4">
-                    <input class="form-control" type="text" formControlName="titulo">
-                </div>
-                <span class="text-danger" *ngIf="livroForm.hasError('required', 'titulo') && formDir.submitted">
-                    Título é obrigatório.
-                </span>
+        <div class="form-group row">
+            <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="active">
+            <input type="hidden" formControlName="createdAt">
+            <input type="hidden" formControlName="editedAt">
+
+            <label class="control-label col-md-4" for="titulo">Título *</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="titulo" required="required">
+            </div>
+            <span class="text-danger" *ngIf="livroForm.hasError('required', 'titulo') && formDir.submitted">
+                Título é obrigatório.
+            </span>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="autor">Autor *</label>
+
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="autor" required="required">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-md-12" for="Gender">Autor</label>
+            <span class="text-danger" *ngIf="livroForm.hasError('required', 'autor') && formDir.submitted">
+                Autor é obrigatório.
+            </span>
+        </div>
 
-                <div class="col-md-4">
-                    <input class="form-control" type="text" formControlName="autor">
-                </div>
-
-                <span class="text-danger" *ngIf="livroForm.hasError('required', 'autor') && formDir.submitted">
-                    Autor é obrigatório.
-                </span>
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="paginas">N&uacute;mero&nbsp;de&nbsp;P&aacute;ginas *</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="paginas" required="required">
             </div>
+            <span class="text-danger" *ngIf="livroForm.hasError('required', 'paginas') && formDir.submitted">
+                Número de Páginas é obrigatório
+            </span>
+        </div>
 
-            <div class="form-group row">
-                <label class="control-label col-md-12" for="Department">Número de Páginas</label>
-                <div class="col-md-4">
-                    <input class="form-control" type="text" formControlName="paginas">
-                </div>
-                <span class="text-danger" *ngIf="livroForm.hasError('required', 'paginas') && formDir.submitted">
-                    Número de Páginas é obrigatório
-                </span>
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="edicao">Edi&ccedil;&atilde;o</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="edicao">
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label class="control-label col-md-12" for="City">Editora</label>
-                <div class="col-md-4">
-                    <input class="form-control" type="text" formControlName="editora" data-val="true">
-                </div>
-                <span class="text-danger" *ngIf="livroForm.hasError('required', 'editora') && formDir.submitted">
-                    Editora é obrigatória
-                </span>
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="idioma">Idioma *</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="idioma" data-val="true" required="required">
             </div>
+            <span class="text-danger" *ngIf="livroForm.hasError('required', 'idioma') && formDir.submitted">
+                Idioma é obrigatório
+            </span>
+        </div>
 
-            <div class="form-group row">
-                <label class="control-label col-md-12" for="City">Data de Publicação</label>
-                <div class="col-md-4">
-                    <input class="form-control" type="text" formControlName="dataPublicacao" data-val="true">
-                </div>
-                <span class="text-danger" *ngIf="livroForm.hasError('required', 'dataPublicacao') && formDir.submitted">
-                    Data de Publicação é obrigatória
-                </span>
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="editora">Editora</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="editora" data-val="true" required="required">
             </div>
+            <span class="text-danger" *ngIf="livroForm.hasError('required', 'editora') && formDir.submitted">
+                Editora é obrigatória
+            </span>
+        </div>
 
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="descricao">Descri&ccedil;&atilde;o</label>
+            <div class="col-md-4">
+                <textarea class="form-control" type="textarea" formControlName="descricao"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="dataPublicacao">Data de Publica&ccedil;&atilde;o</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="dataPublicacao">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="isbN10">ISBM 10</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="isbN10">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="isbN13">ISBM 13</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="isbN13">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-md-4" for="estoque">Estoque</label>
+            <div class="col-md-4">
+                <input class="form-control" type="text" formControlName="estoque">
+            </div>
+        </div>
+        <hr />
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-default">Salvar</button>
             <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>

@@ -17,7 +17,7 @@ export class LivroComponent {
     }
 
     getLivros() {
-        this.http.get(this.baseUrl + 'api/livro').subscribe(result => {
+        this.http.get(this.baseUrl + 'api/livro/Index').subscribe(result => {
             this.livros = result.json() as Livro[];
         }, error => console.error(error));
     }
@@ -41,7 +41,10 @@ interface Livro {
     editora: string;
     descricao: string;
     dataPublicacao: Date;
-    ISBN10: string;
-    ISBN13: string;
+    isbN10: string;
+    isbN13: string;
     estoque: number;
+    active: boolean;
+    createdAt: Date;
+    editedAt: Date;
 }

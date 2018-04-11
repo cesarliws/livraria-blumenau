@@ -16,7 +16,7 @@ namespace LivrariaBlumenau.Models
         public string Edicao { get; set; }
         public string Idioma { get; set; }
         public string Editora { get; set; }
-        public DateTime DataPublicacao { get; set; }
+        public DateTime? DataPublicacao { get; set; }
 
         public string ISBN10 { get; set; }
         public string ISBN13 { get; set; }
@@ -27,7 +27,7 @@ namespace LivrariaBlumenau.Models
         public long? Estoque { get; set; }
 
         public bool? Active { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime EditedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? EditedAt { get; set; }
     }
 }

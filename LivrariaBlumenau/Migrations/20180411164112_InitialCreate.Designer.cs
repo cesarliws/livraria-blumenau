@@ -11,7 +11,7 @@ using System;
 namespace LivrariaBlumenau.Migrations
 {
     [DbContext(typeof(DbEntities))]
-    [Migration("20180411012904_InitialCreate")]
+    [Migration("20180411164112_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,15 +30,15 @@ namespace LivrariaBlumenau.Migrations
 
                     b.Property<string>("Autor");
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<DateTime>("DataPublicacao");
+                    b.Property<DateTime?>("DataPublicacao");
 
                     b.Property<string>("Descricao");
 
                     b.Property<string>("Edicao");
 
-                    b.Property<DateTime>("EditedAt");
+                    b.Property<DateTime?>("EditedAt");
 
                     b.Property<string>("Editora");
 

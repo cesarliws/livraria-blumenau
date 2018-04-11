@@ -31,8 +31,8 @@ import { EditLivroComponent        } from './components/livro/edit/livro.edit.co
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'livro', component: LivroComponent },
-            { path: 'livro-incluir', component: EditLivroComponent },
-            { path: 'livro/edit/:id', component: EditLivroComponent },
+            { path: 'livro/incluir', component: EditLivroComponent },
+            { path: 'livro/alterar/:id', component: EditLivroComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

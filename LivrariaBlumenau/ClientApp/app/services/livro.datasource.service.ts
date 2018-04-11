@@ -10,36 +10,36 @@ import 'rxjs/add/observable/throw';
 export class LivroService {
     apiUrl: string = "";
 
-    constructor(private _http: Http, @Inject('BASE_URL') baseUrl: string) {
+    constructor(private httpClient: Http, @Inject('BASE_URL') baseUrl: string) {
         this.apiUrl = baseUrl;
     }
 
     getLivros() {
-        return this._http.get(this.apiUrl + 'api/Livro/Index')
+        return this.httpClient.get(this.apiUrl + 'api/Livro/Index')
             .map((response: Response) => response.json())
             .catch(this.errorHandler);
     }
 
     getLivro(id: number) {
-        return this._http.get(this.apiUrl + "api/Livro/" + id)
+        return this.httpClient.get(this.apiUrl + "api/Livro/" + id)
             .map((response: Response) => response.json())
             .catch(this.errorHandler)
     }
 
     saveLivro(livro: any) {
-        return this._http.post(this.apiUrl + 'api/Livro', livro)
+        return this.httpClient.post(this.apiUrl + 'api/Livro/Create', livro)
             .map((response: Response) => response.json())
             .catch(this.errorHandler)
     }
 
     updateLivro(livro: any) {
-        return this._http.put(this.apiUrl + 'api/Livro', livro)
+        return this.httpClient.put(this.apiUrl + 'api/Livro/Edit', livro)
             .map((response: Response) => response.json())
             .catch(this.errorHandler);
     }
 
     deleteLivro(id: number) {
-        return this._http.delete(this.apiUrl + "api/Livro/" + id)
+        return this.httpClient.delete(this.apiUrl + "api/Livro/Delete/" + id)
             .map((response: Response) => response.json())
             .catch(this.errorHandler);
     }

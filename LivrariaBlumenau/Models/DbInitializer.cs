@@ -187,9 +187,9 @@ namespace LivrariaBlumenau.Models
                     Active = true
                 }
             };
-            foreach (Livro s in livros)
+            foreach (Livro l in livros)
             {
-                context.Livros.Add(s);
+                context.Livros.Add(l);
             }
             context.SaveChanges();
         }

@@ -29,15 +29,15 @@ namespace LivrariaBlumenau.Migrations
 
                     b.Property<string>("Autor");
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<DateTime?>("CreatedAt");
 
-                    b.Property<DateTime>("DataPublicacao");
+                    b.Property<DateTime?>("DataPublicacao");
 
                     b.Property<string>("Descricao");
 
                     b.Property<string>("Edicao");
 
-                    b.Property<DateTime>("EditedAt");
+                    b.Property<DateTime?>("EditedAt");
 
                     b.Property<string>("Editora");
 

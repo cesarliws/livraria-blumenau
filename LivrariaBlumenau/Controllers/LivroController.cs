@@ -3,11 +3,11 @@ using LivrariaBlumenau.Models;
 using LivrariaBlumenau.Services;
 
 using Microsoft.AspNetCore.Mvc;
+//using AutoMapper;
 
 namespace LivrariaBlumenau.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Livro")]
     public class LivroController : Controller
     {
         private DbEntities _context;
@@ -19,16 +19,16 @@ namespace LivrariaBlumenau.Controllers
             _context = context;
         }
 
-        // GET: api/livro
         [HttpGet]
+        [Route("api/Livro/Index")]
         public async Task<IActionResult> Get()
         {
             var livros = await _livroService.GetAllAsync();
             return Ok(livros);
         }
 
-        // GET api/livro/:id
-        [HttpGet("{id}")]
+        [HttpGet]
+        [Route("api/Livro/{id}")]
         public async Task<IActionResult> Get(long id)
         {
             if (id == 0)
@@ -43,32 +43,39 @@ namespace LivrariaBlumenau.Controllers
             return Ok(livro);
         }
 
-        // POST api/livro
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Livro livro)
+        [Route("api/Livro/Create")]
+        public async Task<IActionResult> Create([FromBody]Livro livro)
         {
             if (livro == null)
             {
                 return BadRequest();
             }
-            await _livroService.CreateAsync(livro);
-            return Ok();
-        }
-
-        // PUT api/livro/:id
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody]Livro livro)
-        {
-            if (id == 0 || livro == null)
+            if (ModelState.IsValid)
+            {
+                await _livroService.CreateAsync(livro);
+                return Ok(livro);
+            }
+            else
             {
                 return BadRequest();
             }
-            await _livroService.PutAsync(id, livro);
-            return Ok();
         }
 
-        // DELETE api/livro/:id
-        [HttpDelete("{id}")]
+        [HttpPut]
+        [Route("api/Livro/Edit")]
+        public async Task<IActionResult> Edit([FromBody]Livro livro)
+        {
+            if (livro == null)
+            {
+                return BadRequest();
+            }
+            await _livroService.UpdateAsync(livro);
+            return Ok(livro);
+        }
+
+        [HttpDelete]
+        [Route("api/Livro/Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
