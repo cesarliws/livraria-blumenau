@@ -26,7 +26,7 @@
             <td>{{ livro.dataPublicacao | date:'dd/MM/yyyy' }}</td>
             <td>
                 <a class="btn btn-info" [routerLink]="['/livro/edit/', livro.id]" title="Alterar Livro"><span class='glyphicon glyphicon-pencil'></span></a>
-                <a class="btn btn-danger" [routerLink]="" (click)="delete(livro.id)" title="Excluir Livro"><span class='glyphicon glyphicon-remove'></span></a>
+                <a class="btn btn-danger" [routerLink]="" (click)="delete(livro.id, livro.titulo)" title="Excluir Livro"><span class='glyphicon glyphicon-remove'></span></a>
             </td>
         </tr>
     </tbody>

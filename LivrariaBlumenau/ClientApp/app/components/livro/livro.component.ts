@@ -11,7 +11,8 @@ import { LivroService } from '../../services/livro.datasource.service';
 export class LivroComponent {
     public livros: Livro[];
 
-    constructor(private livroService: LivroService, private http: Http, @Inject('BASE_URL') private baseUrl: string) {
+    constructor(private livroService: LivroService, private http: Http,
+          @Inject('BASE_URL') private baseUrl: string) {
         this.getLivros();
     }
 
@@ -19,11 +20,10 @@ export class LivroComponent {
         this.http.get(this.baseUrl + 'api/livro').subscribe(result => {
             this.livros = result.json() as Livro[];
         }, error => console.error(error));
-        
     }
 
-    delete(id: number) {
-        if (confirm("Excluir o Livro?")) {
+    delete(id: number, titulo: string) {
+        if (confirm(`"${titulo}"\nExcluir o Livro?`)) {
             this.livroService.deleteLivro(id).subscribe((data) => {
                 this.getLivros();
             }, error => console.error(error)) 
