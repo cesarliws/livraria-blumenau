@@ -20,7 +20,7 @@ https://github.com/cesarliws/livraria-blumenau.git
 - Restaurar pacotes
 - Build
 - Executar o projeto
-  - Será criado o banco de dados e populado com 10 registros exemplo.
+  - Será criado o banco de dados e populado com 10 registros.
 
 ## Stack
 
