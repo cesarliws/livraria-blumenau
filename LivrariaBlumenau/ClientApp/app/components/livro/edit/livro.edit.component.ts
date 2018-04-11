@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { NgForm, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LivroComponent } from '../../livro/livro.component';
 import { LivroService } from '../../../services/livro.datasource.service';
@@ -10,20 +10,21 @@ import { LivroService } from '../../../services/livro.datasource.service';
     templateUrl: './livro.edit.component.html'
 })
 
-export class EditLivro implements OnInit {
+export class EditLivroComponent implements OnInit {
     livroForm: FormGroup;
     title: string = "Incluir";
     id: number;
     errorMessage: any;
 
-    constructor(private _fb: FormBuilder, private _avRoute: ActivatedRoute,
-        private _livroService: LivroService, private _router: Router) {
-        if (this._avRoute.snapshot.params["id"]) {
-            this.id = this._avRoute.snapshot.params["id"];
+    constructor(private formBuild: FormBuilder, private activateRoute: ActivatedRoute,
+        private livroService: LivroService, private router: Router) {
+        
+        if (this.activateRoute.snapshot.params["id"]) {
+            this.id = this.activateRoute.snapshot.params["id"];
         }
 
-        this.livroForm = this._fb.group({
-            id: 0,
+        this.livroForm = this.formBuild.group({
+            //id: 0,
             titulo: ['', [Validators.required]],
             autor: ['', [Validators.required]],
             paginas: ['', [Validators.required]],
@@ -35,7 +36,7 @@ export class EditLivro implements OnInit {
     ngOnInit() {
         if (this.id > 0) {
             this.title = "Alterar";
-            this._livroService.getLivro(this.id)
+            this.livroService.getLivro(this.id)
                 .subscribe(resp => this.livroForm.setValue(resp), 
                     error => this.errorMessage = error);
         }
@@ -47,21 +48,21 @@ export class EditLivro implements OnInit {
         }
 
         if (this.title == "Incluir") {
-            this._livroService.saveLivro(this.livroForm.value)
+            this.livroService.saveLivro(this.livroForm.value)
                 .subscribe((data) => {
-                    this._router.navigate(['/livro']);
+                    this.router.navigate(['/livro']);
                 }, error => this.errorMessage = error)
         }
         else if (this.title == "Alterar") {
-            this._livroService.updateLivro(this.livroForm.value)
+            this.livroService.updateLivro(this.livroForm.value)
                 .subscribe((data) => {
-                    this._router.navigate(['/livro']);
+                    this.router.navigate(['/livro']);
                 }, error => this.errorMessage = error) 
         }
     }
 
     cancel() {
-        this._router.navigate(['/livro']);
+        this.router.navigate(['/livro']);
     }
 
     get titulo() { return this.livroForm.get('titulo'); }

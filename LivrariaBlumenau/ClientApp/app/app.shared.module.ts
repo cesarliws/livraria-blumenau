@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { LivroService } from './services/livro.datasource.service'
 
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
@@ -12,7 +12,7 @@ import { AppComponent     } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent    } from './components/home/home.component';
 import { LivroComponent   } from './components/livro/livro.component';
-import { EditLivro        } from './components/livro/edit/livro.edit.component'
+import { EditLivroComponent        } from './components/livro/edit/livro.edit.component'
 
 @NgModule({
     declarations: [
@@ -20,18 +20,19 @@ import { EditLivro        } from './components/livro/edit/livro.edit.component'
         NavMenuComponent,
         HomeComponent,
         LivroComponent,
-        EditLivro
+        EditLivroComponent
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'livro', component: LivroComponent },
-            { path: 'livro-incluir', component: EditLivro },
-            { path: 'livro/edit/:id', component: EditLivro },
+            { path: 'livro-incluir', component: EditLivroComponent },
+            { path: 'livro/edit/:id', component: EditLivroComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
