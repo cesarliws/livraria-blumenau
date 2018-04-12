@@ -13,11 +13,6 @@ namespace LivrariaBlumenau.Models
         }
 
         public DbSet<Livro> Livros { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
-        }
     }
 
     class DBEntitiesContextFactory : IDesignTimeDbContextFactory<DbEntities>
