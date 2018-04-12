@@ -45,3 +45,4 @@ https://github.com/cesarliws/livraria-blumenau.git
   - Tags
   - Genero
   - Controle de Estoque
+- Documentar a API com Swagger
