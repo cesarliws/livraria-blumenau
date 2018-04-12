@@ -6,18 +6,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace LivrariaBlumenau.Models
 {
-    public class DbEntities : DbContext
+    public class EntitiesContext : DbContext
     {
-        public DbEntities(DbContextOptions<DbEntities> options) : base(options)
+        public EntitiesContext(DbContextOptions<EntitiesContext> options) : base(options)
         {
         }
 
         public DbSet<Livro> Livros { get; set; }
     }
 
-    class DBEntitiesContextFactory : IDesignTimeDbContextFactory<DbEntities>
+    class DBEntitiesContextFactory : IDesignTimeDbContextFactory<EntitiesContext>
     {
-        public DbEntities CreateDbContext(string[] args)
+        public EntitiesContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -26,10 +26,10 @@ namespace LivrariaBlumenau.Models
 
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            var builder = new DbContextOptionsBuilder<DbEntities>();
+            var builder = new DbContextOptionsBuilder<EntitiesContext>();
             builder.UseSqlServer(connectionString);
 
-            return new DbEntities(builder.Options);
+            return new EntitiesContext(builder.Options);
         }
     }
 

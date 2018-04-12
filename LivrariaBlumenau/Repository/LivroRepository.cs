@@ -8,31 +8,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LivrariaBlumenau.Services
 {
-    public class LivroService : IModelService<Livro>
+    public class LivroRepository : IRepository<Livro>
     {
-        private DbEntities _context;
+        private EntitiesContext context;
 
-        public LivroService(DbEntities context)
+        public LivroRepository(EntitiesContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task CreateAsync(Livro livro)
         {
-            _context.Livros.Add(livro);
-            await _context.SaveChangesAsync();
+            context.Livros.Add(livro);
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(long id)
         {
             var livro = await FindLivro(id);
-            _context.Remove(livro);
-            await _context.SaveChangesAsync();
+            context.Remove(livro);
+            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Livro>> GetAllAsync()
         {
-            return await _context.Livros.OrderBy(l => l.Titulo).ToListAsync();
+            return await context.Livros.OrderBy(l => l.Titulo).ToListAsync();
         }
 
         public async Task<Livro> GetAsync(long id)
@@ -46,8 +46,8 @@ namespace LivrariaBlumenau.Services
 
             if (l != null)
             {
-                _context.Entry(l).CurrentValues.SetValues(livro);
-                await _context.SaveChangesAsync();
+                context.Entry(l).CurrentValues.SetValues(livro);
+                await context.SaveChangesAsync();
             }
         }
 
@@ -57,8 +57,8 @@ namespace LivrariaBlumenau.Services
 
             if (l != null)
             {
-                _context.Entry(l).CurrentValues.SetValues(livro);
-                await _context.SaveChangesAsync();
+                context.Entry(l).CurrentValues.SetValues(livro);
+                await context.SaveChangesAsync();
             }
         }
 
@@ -69,7 +69,7 @@ namespace LivrariaBlumenau.Services
 
         private async Task<Livro> FindLivro(long id)
         {
-            var livro = await _context.Livros.SingleOrDefaultAsync(l => l.Id == id);
+            var livro = await context.Livros.SingleOrDefaultAsync(l => l.Id == id);
             return livro;
         }
     }

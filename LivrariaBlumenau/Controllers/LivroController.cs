@@ -9,20 +9,20 @@ namespace LivrariaBlumenau.Controllers
     [Produces("application/json")]
     public class LivroController : Controller
     {
-        private DbEntities _context;
-        private IModelService<Livro> _livroService;
+        private EntitiesContext context;
+        private IRepository<Livro> livroRepository;
 
-        public LivroController(IModelService<Livro> livroService, DbEntities context)
+        public LivroController(IRepository<Livro> livroRepository, EntitiesContext context)
         {
-            _livroService = livroService;
-            _context = context;
+            this.livroRepository = livroRepository;
+            this.context = context;
         }
 
         [HttpGet]
         [Route("api/Livro/Index")]
         public async Task<IActionResult> Get()
         {
-            var livros = await _livroService.GetAllAsync();
+            var livros = await livroRepository.GetAllAsync();
             return Ok(livros);
         }
 
@@ -35,7 +35,7 @@ namespace LivrariaBlumenau.Controllers
                 return BadRequest();
             }
 
-            Livro livro = await _livroService.GetAsync(id);
+            Livro livro = await livroRepository.GetAsync(id);
             if (livro == null)
                 NotFound();
 
@@ -50,7 +50,7 @@ namespace LivrariaBlumenau.Controllers
             {
                 return BadRequest();
             }
-            await _livroService.CreateAsync(livro);
+            await livroRepository.CreateAsync(livro);
             return Ok(livro);
         }
 
@@ -63,7 +63,7 @@ namespace LivrariaBlumenau.Controllers
                 return BadRequest();
             }
 
-            await _livroService.UpdateAsync(livro);
+            await livroRepository.UpdateAsync(livro);
             return Ok(livro);
         }
 
@@ -76,7 +76,7 @@ namespace LivrariaBlumenau.Controllers
                 return BadRequest();
             }
 
-            await _livroService.DeleteAsync(id);
+            await livroRepository.DeleteAsync(id);
             return NoContent();
         }
     }

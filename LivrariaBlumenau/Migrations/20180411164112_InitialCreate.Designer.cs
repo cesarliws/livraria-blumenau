@@ -10,7 +10,7 @@ using System;
 
 namespace LivrariaBlumenau.Migrations
 {
-    [DbContext(typeof(DbEntities))]
+    [DbContext(typeof(EntitiesContext))]
     [Migration("20180411164112_InitialCreate")]
     partial class InitialCreate
     {

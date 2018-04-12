@@ -4,7 +4,7 @@
 
 <p *ngIf="!livros"><em>Aguarde...</em></p>
 <p>
-    <a class="btn btn-primary" [routerLink]="['/livro/incluir'] "title="Incluir Livro">Incluir</a>
+    <a class="btn btn-primary" [routerLink]="['/livro/incluir'] " title="Incluir Livro">Incluir</a>
 </p>
 
 <table class='table' *ngIf="livros">
@@ -31,3 +31,5 @@
         </tr>
     </tbody>
 </table>
+<hr />
+<p><strong>{{ livros.length }} registro(s)</strong></p>

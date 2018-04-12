@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace LivrariaBlumenau.Services
 {
-    public interface IModelService<T>
+    public interface IRepository<T>
     {
         //New object
         T New();
@@ -17,7 +17,6 @@ namespace LivrariaBlumenau.Services
 
         //Update
         Task UpdateAsync(T model);
-
         Task PutAsync(long id, T Model);
 
         //Delete

@@ -10,7 +10,7 @@ using System;
 
 namespace LivrariaBlumenau.Migrations
 {
-    [DbContext(typeof(DbEntities))]
+    [DbContext(typeof(EntitiesContext))]
     partial class DbEntitiesModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

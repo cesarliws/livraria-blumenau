@@ -59,13 +59,13 @@ namespace LivrariaBlumenau
         public void ConfigureDatabase(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<DbEntities>(options =>
+            services.AddDbContext<EntitiesContext>(options =>
                 options.UseSqlServer(connectionString));
         }
 
         private static void ConfigureModelMapping(IServiceCollection services)
         {
-            services.AddTransient<IModelService<Livro>, LivroService>();
+            services.AddTransient<IRepository<Livro>, LivroRepository>();
         }
 
     }

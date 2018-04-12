@@ -20,8 +20,8 @@ namespace LivrariaBlumenau
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<DbEntities>();
-                    DbInitializer.Seed(context);
+                    var context = services.GetRequiredService<EntitiesContext>();
+                    DatabaseInitializer.Seed(context);
                 }
                 catch (Exception ex)
                 {

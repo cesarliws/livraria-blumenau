@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace LivrariaBlumenau.Models
 {
-    public class DbInitializer
+    public class DatabaseInitializer
     {
-        public static void Seed(DbEntities context)
+        public static void Seed(EntitiesContext context)
         {
             context.Database.EnsureCreated();
 
